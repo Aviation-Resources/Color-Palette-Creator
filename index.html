@@ -10,6 +10,23 @@
 
         gtag('config', 'AW-10888678622');
     </script>
+    <!-- Event snippet for Upload File conversion page
+    In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+    <script>
+        function gtag_report_conversion(url) {
+            var callback = function () {
+                if (typeof (url) != 'undefined') {
+                    window.location = url;
+                }
+            };
+            gtag('event', 'appstoreconversion', {
+                'send_to': 'AW-10888678622/Nvz_CIW8-_EZEN6ZkMgo',
+                'event_callback': callback
+            });
+            return false;
+        }
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your App – Color Palette Generator</title>
@@ -77,7 +94,7 @@
             <a href="https://base44.com/" target="_blank">base44</a> or 
             <a href="https://lovable.so/" target="_blank">Lovable</a>. Give your upstream AI the context it needs to be consistent.
         </p>
-        <a href="https://testflight.apple.com/join/Cr584btW" class="button" target="_blank">Download on TestFlight</a>
+        <a href="https://testflight.apple.com/join/Cr584btW" class="button" target="_blank" onclick="return gtag_report_conversion('https://testflight.apple.com/join/Cr584btW');">Download on TestFlight</a>
         <br><br>
         <div style="margin-top: 2rem; display: flex; gap: 2rem; justify-content: center;">
             <a href="support.html" class="footer-link" target="_blank">Support</a>
