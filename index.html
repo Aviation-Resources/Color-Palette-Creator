@@ -78,12 +78,178 @@
         a.button:hover {
             background: #444;
         }
+        
+        /* Carousel Styles */
+        .carousel-container {
+            max-width: 800px;
+            margin: 3rem auto 2rem;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        
+        .carousel-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+        }
+        
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: contain;
+            display: block;
+            border-radius: 12px;
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.3s ease;
+            z-index: 10;
+        }
+        
+        .carousel-nav:hover {
+            background: rgba(0,0,0,0.8);
+        }
+        
+        .carousel-prev {
+            left: 10px;
+        }
+        
+        .carousel-next {
+            right: 10px;
+        }
+        
+        .carousel-indicators {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+        
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .carousel-indicator.active {
+            background: rgba(255,255,255,0.9);
+        }
+        
+        .carousel-title {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        
+        /* Desktop view - show all 4 images */
+        @media (min-width: 1024px) {
+            .carousel-container {
+                max-width: 1200px;
+                overflow: visible;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .carousel-wrapper {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+                transform: none !important;
+                transition: none;
+            }
+            
+            .carousel-slide {
+                min-width: auto;
+            }
+            
+            .carousel-slide img {
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            
+            .carousel-slide img:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            }
+            
+            .carousel-nav,
+            .carousel-indicators {
+                display: none;
+            }
+        }
+        
+        /* Tablet view - show 2 images at a time */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .carousel-container {
+                max-width: 900px;
+            }
+            
+            .carousel-wrapper {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                transform: none !important;
+                transition: none;
+            }
+            
+            .carousel-slide {
+                min-width: auto;
+            }
+            
+            .carousel-slide img {
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+            
+            .carousel-nav,
+            .carousel-indicators {
+                display: none;
+            }
+        }
+        
+        /* Responsive adjustments for mobile */
+        @media (max-width: 767px) {
+            .carousel-container {
+                margin: 2rem 1rem 1rem;
+            }
+            
+            .carousel-nav {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Color Palette Creator</h1>
-        <img src="256x256@1x.png" alt="App Icon" class="icon">
+        <img src="LOGO.png" alt="App Icon" class="icon">
         <p>Color palette creators are a dime a dozen but this one has been developed from the ground up to use the latest AI Tools to get you professional color palettes ready to use for modern workflows.</p>
         <p>You could be designing a kitchen, picking the perfect colors for your next business idea, or simply enjoy creative AI assisted prompting and colors then this tool is for you.</p>
         <p>
@@ -96,11 +262,118 @@
         </p>
         <a href="https://apps.apple.com/us/app/color-palette-creator/id6751915706" class="button" target="_blank" rel="noopener noreferrer">Latest Release</a>
         <a href="https://testflight.apple.com/join/Cr584btW" class="button" target="_blank" rel="noopener noreferrer">Beta version</a>
+        
+        <!-- Photo Carousel -->
+        <div class="carousel-title">See the App in Action</div>
+        <div class="carousel-container">
+            <div class="carousel-wrapper" id="carouselWrapper">
+                <div class="carousel-slide">
+                    <img src="CarouselPhotos/Visual Color Picker Main Image.png" alt="Visual Color Picker Interface">
+                </div>
+                <div class="carousel-slide">
+                    <img src="CarouselPhotos/Palette_list_one.png" alt="Color Palette Collection View">
+                </div>
+                <div class="carousel-slide">
+                    <img src="CarouselPhotos/Palette_list_two.png" alt="Additional Palette Options">
+                </div>
+                <div class="carousel-slide">
+                    <img src="CarouselPhotos/Web site creation.png" alt="Website Creation with Color Palettes">
+                </div>
+            </div>
+            
+            <button class="carousel-nav carousel-prev" onclick="changeSlide(-1)">‹</button>
+            <button class="carousel-nav carousel-next" onclick="changeSlide(1)">›</button>
+            
+            <div class="carousel-indicators">
+                <div class="carousel-indicator active" onclick="currentSlide(1)"></div>
+                <div class="carousel-indicator" onclick="currentSlide(2)"></div>
+                <div class="carousel-indicator" onclick="currentSlide(3)"></div>
+                <div class="carousel-indicator" onclick="currentSlide(4)"></div>
+            </div>
+        </div>
+        
         <br><br>
         <div style="margin-top: 2rem; display: flex; gap: 2rem; justify-content: center;">
             <a href="support.html" class="footer-link" target="_blank">Support</a>
             <a href="privacy.html" class="footer-link" target="_blank">Privacy</a>
         </div>
     </div>
+    
+    <script>
+        let slideIndex = 1;
+        const totalSlides = 4;
+        let carouselInterval;
+        
+        function isMobile() {
+            return window.innerWidth <= 767;
+        }
+        
+        function showSlide(n) {
+            if (!isMobile()) return; // Only run on mobile
+            
+            const wrapper = document.getElementById('carouselWrapper');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            
+            if (n > totalSlides) {slideIndex = 1}
+            if (n < 1) {slideIndex = totalSlides}
+            
+            // Update transform for carousel wrapper
+            const translateX = -(slideIndex - 1) * 100;
+            wrapper.style.transform = `translateX(${translateX}%)`;
+            
+            // Update active indicator
+            indicators.forEach((indicator, index) => {
+                indicator.classList.remove('active');
+                if (index === slideIndex - 1) {
+                    indicator.classList.add('active');
+                }
+            });
+        }
+        
+        function changeSlide(direction) {
+            if (!isMobile()) return;
+            slideIndex += direction;
+            showSlide(slideIndex);
+        }
+        
+        function currentSlide(n) {
+            if (!isMobile()) return;
+            slideIndex = n;
+            showSlide(slideIndex);
+        }
+        
+        function startCarousel() {
+            if (isMobile()) {
+                carouselInterval = setInterval(() => {
+                    slideIndex++;
+                    showSlide(slideIndex);
+                }, 5000);
+            }
+        }
+        
+        function stopCarousel() {
+            if (carouselInterval) {
+                clearInterval(carouselInterval);
+            }
+        }
+        
+        function handleResize() {
+            if (isMobile()) {
+                showSlide(slideIndex);
+                startCarousel();
+            } else {
+                stopCarousel();
+                // Reset transform for desktop view
+                const wrapper = document.getElementById('carouselWrapper');
+                wrapper.style.transform = 'none';
+            }
+        }
+        
+        // Initialize carousel based on screen size
+        handleResize();
+        
+        // Handle window resize
+        window.addEventListener('resize', handleResize);
+    </script>
 </body>
 </html>
